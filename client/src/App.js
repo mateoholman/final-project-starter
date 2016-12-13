@@ -1,3 +1,6 @@
+// After sign-out I'm getting authentication errors. The user is not being routed
+// away from secret when they sign-out.
+
 import React, { Component } from 'react';
 import { BrowserRouter, Match, Miss } from 'react-router';
 import './App.css';
@@ -38,16 +41,21 @@ class App extends Component {
  }//End handleSignUp()
 
  handleSignIn(credentials) {
+   //Need to setup notices if username is not found or if password
+   //does not match.
    const { username, password } = credentials;
+   //Make sure the user entered a username & password
    if (!username.trim() || !password.trim()) {
      this.setState({
        ...this.state,
        signUpSignInError: 'Must Provide All Fields'
      });
    } else {
+     //Verify the user exists & the password matches the user.
      axios.post('/api/signin', credentials)
        .then(resp => {
          const { token } = resp.data;
+         console.log('The sign in token is: ' + token);
          this.setState({
            ...this.state,
            signUpSignInError: '',
@@ -60,10 +68,13 @@ class App extends Component {
 
   handleSignOut() {
     localStorage.removeItem('token');
+    console.log('The local storage token is: ' + localStorage.getItem('token'));
     this.setState({
-      signUpSignInError: '',
+      ...this.state,
       authenticated: false
     });
+    console.log('Authenticated state is: ' + this.state.authenticated);
+    axios.get('/');
   }
 
   renderSignUpSignIn() {
@@ -84,7 +95,7 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div className="App">
-          <TopNavbar showNavItems={true} onSignOut={this.handleSignOut.bind(this)}/>
+          <TopNavbar showNavItems={this.state.authenticated} onSignOut={this.handleSignOut.bind(this)}/>
           {this.state.authenticated ? this.renderApp() : this.renderSignUpSignIn()}
         </div>
       </BrowserRouter>
