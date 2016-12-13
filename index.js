@@ -16,12 +16,15 @@ mongoose.connect('mongodb://localhost/final-project-app')
 
 const app = express();
 
+//Setup our routes
 const authenticationRoutes = require('./routes/authentication');
+const authStrategy = passport.authenticate('authStrategy', { session: false });
+const listRoutes = require('./routes/list');
 
 app.use(bodyParser.json());
 app.use('/api', authenticationRoutes);
+app.use('/api/lists', authStrategy, listRoutes);
 
-const authStrategy = passport.authenticate('authStrategy', { session: false });
 
 app.get('/api/secret', authStrategy, function(req, res, next) {
   res.send(`The current user is ${req.user.username}`);
