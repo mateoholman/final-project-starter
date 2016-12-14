@@ -13,6 +13,7 @@ router.post('/', ListsController.create);
 router.get('/:id', ListsController.show);
 
 // Edit a list
+router.put('/:id', ListsController.update);
 
 // Delete a single List
 router.delete('/:id', ListsController.remove);

@@ -7,6 +7,7 @@ import './App.css';
 import SignUpSignIn from './SignUpSignIn';
 import TopNavbar from './TopNavbar';
 import Secret from './Secret';
+import List from './List';
 import axios from 'axios';
 
 class App extends Component {
@@ -86,6 +87,7 @@ class App extends Component {
       <div>
         <Match exactly pattern="/" render={() => <h1>I am protected!</h1>} />
         <Match exactly pattern="/secret" component={Secret} />
+        <Match exactly pattern="/lists" component={List} />
         <Miss render={() => <h1>NOT FOUND!</h1>} />
       </div>
     );

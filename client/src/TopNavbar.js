@@ -18,6 +18,9 @@ const TopNavbar = (props) => {
               <NavItem onClick={props.onSignOut}><Link to="/">Sign Out</Link></NavItem>
             </Nav>
             <Nav pullRight>
+              <Link to="/lists"><Navbar.Text>Lists</Navbar.Text></Link>
+            </Nav>
+            <Nav pullRight>
               <Link to="/secret"><Navbar.Text>Secret</Navbar.Text></Link>
             </Nav>
           </Navbar.Collapse>
