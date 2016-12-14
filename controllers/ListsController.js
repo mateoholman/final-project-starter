@@ -1,7 +1,7 @@
 const ListModel = require('../models/ListModel');
 
 module.exports = {
-  
+
   list(req, res, next) {
     ListModel.find({ user: req.user._id })
       .exec()
@@ -19,11 +19,26 @@ module.exports = {
       .catch(next);
   },
 
+  update(req, res, next) {
+    ListModel.findOne({
+      user: req.user._id,
+      _id: req.params.id
+    })
+      .exec()
+      .then(list => {
+        list.title = req.body.title;
+        return list.save();
+      })
+      .then(list => res.json(list))
+      .catch(next)
+  },
+
   show(req, res, next) {
     ListModel.findOne({
       user: req.user._id,
       _id: req.params.id
     })
+      .populate('items')
       .exec()
       .then(list => res.json(list))
       .catch(next);
