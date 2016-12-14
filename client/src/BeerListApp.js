@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-class List extends Component {
+class BeerListApp extends Component {
   constructor() {
     super();
 
     this.state = {
-
+      beerLists: []
     };
   }
 
@@ -16,10 +16,10 @@ class List extends Component {
 
   render() {
     return (
-      <h1>List</h1>
+      <h1>Badass Beer Lists</h1>
     );
   }
 
 }//End List
 
-export default List;
+export default BeerListApp;
