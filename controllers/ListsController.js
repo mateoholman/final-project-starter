@@ -12,6 +12,7 @@ module.exports = {
   create(req, res, next) {
     new ListModel({
       title: req.body.title,
+      avatar: req.body.avatar,
       user: req.user._id
     })
       .save()
@@ -27,6 +28,7 @@ module.exports = {
       .exec()
       .then(list => {
         list.title = req.body.title;
+        list.avatar = req.body.avatar;
         return list.save();
       })
       .then(list => res.json(list))
