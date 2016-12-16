@@ -1,13 +1,11 @@
-// After sign-out I'm getting authentication errors. The user is not being routed
-// away from secret when they sign-out.
-
 import React, { Component } from 'react';
 import { BrowserRouter, Match, Miss } from 'react-router';
-import './App.css';
+import '../css/App.css';
 import SignUpSignIn from './SignUpSignIn';
 import TopNavbar from './TopNavbar';
 import Secret from './Secret';
 import BeerListApp from './BeerListApp';
+import ShowBeerList from './ShowBeerList';
 import axios from 'axios';
 
 class App extends Component {
@@ -56,13 +54,13 @@ class App extends Component {
      axios.post('/api/signin', credentials)
        .then(resp => {
          const { token } = resp.data;
+          localStorage.setItem('token', token);
          console.log('The sign in token is: ' + token);
          this.setState({
            ...this.state,
            signUpSignInError: '',
            authenticated: token
          });
-         localStorage.setItem('token', token);
        });
    }
  }//End handleSignIn()
@@ -82,10 +80,15 @@ class App extends Component {
     return <SignUpSignIn error={this.state.signUpSignInError} onSignUp={this.handleSignUp.bind(this)} onSignIn={this.handleSignIn.bind(this)} />
   }
 
+  renderUserBeerList() {
+    // return <ShowBeerList>
+  }
+
   renderApp() {
     return (
       <div>
         <Match exactly pattern="/" component={BeerListApp} />
+        <Match exactly pattern="/beerList" render={(routerProps) => <ShowBeerList {...routerProps} />} />
         <Match exactly pattern="/secret" component={Secret} />
         <Miss render={() => <h1>NOT FOUND!</h1>} />
       </div>
