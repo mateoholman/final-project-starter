@@ -1,24 +1,22 @@
 .App {
+
+}
+
+.beer-list-app {
+  border: 2px solid green;
   text-align: center;
+  /*max-width: 50em;*/
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+.beer-lists {
+  border: 3px solid red;
+  width: 50%;
+  margin: 0 auto;
+  /*text-align: center;*/
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
-}
-
-.App-intro {
-  font-size: large;
-}
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.new-list-button {
+  border: 2px solid blue;
+  width: 40%;
+  margin: 1em auto;
 }

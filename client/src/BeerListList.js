@@ -10,7 +10,7 @@ class BeerListList extends Component {
   render() {
     const { beerLists } = this.props;
     return(
-      <div className='container'>
+      <div className='beer-lists'>
         {beerLists.map(list => {
           return(
             <BeerList

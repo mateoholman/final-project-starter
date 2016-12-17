@@ -1,8 +1,8 @@
 .beer-list {
   border: 1px black solid;
+  text-align: center;
   height: 7em;
-  max-width: 30em;
-  margin: .5em 1em;
+  margin: 1em auto;
 }
 
 .beer-list-avatar {
@@ -19,5 +19,5 @@
 }
 
 .beer-list-title {
-  text-align: center;
+  margin: 0 auto;
 }
