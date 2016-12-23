@@ -6,6 +6,7 @@ import TopNavbar from './TopNavbar';
 import Secret from './Secret';
 import BeerListApp from './BeerListApp';
 import ShowBeerList from './ShowBeerList';
+import BeerListForm from './BeerListForm';
 import axios from 'axios';
 
 class App extends Component {
@@ -84,10 +85,21 @@ class App extends Component {
     // return <ShowBeerList>
   }
 
+  handleAddList(attributes) {
+    axios.post('/api/lists', attributes, {
+      headers: {
+        authorization: localStorage.getItem('token')
+      }
+    })
+      .then(resp => console.log(resp.title + ' was added to the database!'))
+      .catch(err => console.log(err));
+  }
+
   renderApp() {
     return (
       <div>
-        <Match exactly pattern="/" component={BeerListApp} />
+        <Match exactly pattern="/" render={() => <BeerListApp />} />
+        <Match exactly pattern="/newBeerList" render={() => <BeerListForm onAdd={this.handleAddList.bind(this)}/>} />
         <Match exactly pattern="/beerList" render={(routerProps) => <ShowBeerList {...routerProps} />} />
         <Match exactly pattern="/secret" component={Secret} />
         <Miss render={() => <h1>NOT FOUND!</h1>} />
@@ -106,5 +118,6 @@ class App extends Component {
     );
   }//End render()
 }
+
 
 export default App;
