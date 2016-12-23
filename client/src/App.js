@@ -1,3 +1,5 @@
+// Adding a new route method
+
 import React, { Component } from 'react';
 import { BrowserRouter, Match, Miss } from 'react-router';
 import '../css/App.css';
